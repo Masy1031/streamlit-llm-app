@@ -1,6 +1,8 @@
 import streamlit as st
 from langchain_openai import ChatOpenAI
-from langchain.schema import SystemMessage, HumanMessage
+from langchain_core.messages import SystemMessage, HumanMessage
+import sys
+sys.path.append('c:/Users/tales/OneDrive/デスクトップ/streamlit-llm-app/env/Lib/site-packages')
 
 def get_llm_response(input_text, expert_type):
     """
