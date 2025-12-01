@@ -17,9 +17,9 @@ def get_llm_response(input_text, expert_type):
     """
     # 専門家の種類に基づくシステムメッセージを定義
     expert_prompts = {
-        "Historian": "あなたは世界史の専門家です。",
-        "Scientist": "あなたは物理学を専門とする科学者です。",
-        "Chef": "あなたは国際料理の専門家であるプロのシェフです。"
+        "世界史": "あなたは世界史の専門家です。",
+        "物理学": "あなたは物理学を専門とする科学者です。",
+        "国際料理": "あなたは国際料理の専門家であるプロのシェフです。"
     }
 
     system_message = expert_prompts.get(expert_type, "あなたは役に立つアシスタントです。")
