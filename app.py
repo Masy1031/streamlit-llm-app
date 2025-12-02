@@ -1,8 +1,6 @@
 import streamlit as st
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import SystemMessage, HumanMessage
-import sys
-sys.path.append('c:/Users/tales/OneDrive/デスクトップ/streamlit-llm-app/env/Lib/site-packages')
 
 def get_llm_response(input_text, expert_type):
     """
@@ -22,7 +20,11 @@ def get_llm_response(input_text, expert_type):
         "国際料理": "あなたは国際料理の専門家であるプロのシェフです。"
     }
 
+    # デバッグ用の出力を追加
+    st.write(f":wrench: Debug: 選択されたキー = {expert_type}")
+
     system_message = expert_prompts.get(expert_type, "あなたは役に立つアシスタントです。")
+    st.info(f":robot_face: 現在のシステム設定: {system_message}")
 
     # LLMを初期化
     llm = ChatOpenAI(model_name="gpt-4o-mini", temperature=0)
@@ -33,8 +35,8 @@ def get_llm_response(input_text, expert_type):
         HumanMessage(content=input_text),
     ]
 
-    # LLMからの結果を取得
-    result = llm(messages)
+    # LLMからの結果を取得（新しいinvokeメソッドを使用）
+    result = llm.invoke(messages)
     return result.content
 
 # Streamlitアプリ
@@ -54,10 +56,10 @@ st.markdown(
     """
 )
 
-# 専門家の種類を選択するためのラジオボタン
+# 専門家の種類を選択するためのラジオボタン（日本語に変更）
 expert_type = st.radio(
     "専門家の種類を選択してください:",
-    ("Historian", "Scientist", "Chef")
+    ("世界史", "物理学", "国際料理")
 )
 
 # ユーザーの質問を入力するためのテキスト入力欄
